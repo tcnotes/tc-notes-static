@@ -13,7 +13,6 @@ Version: 1.0.0
     --tc-text-main: #2C2825; 
     --tc-text-muted: #777777; 
     --tc-border: #E8E5DF; 
-
     --tc-font-body: system-ui, -apple-system, sans-serif;
     --tc-font-mono: "Courier New", Courier, monospace;
 }
@@ -37,10 +36,10 @@ body {
 
 /* CHUẨN HÓA THẺ P THEO YÊU CẦU */
 p {
-    font-family: var(--tc-font-main);
-    font-size: 1.1rem;
+    font-family: var(--tc-font-body);
+    font-size: 1rem;
     font-weight: 200;
-    line-height: 1.4;
+    line-height: 1.9;
     color: var(--tc-text-main);
     margin-bottom: 1.6em; 
 }
@@ -297,7 +296,7 @@ h4 { font-size: 1.25rem; }
 }
 
 .tc-role {
-    font-family: var(--tc-font-main);
+    font-family: var(--tc-font-body);
     font-style: italic;
     color: var(--tc-text-muted);
     font-size: 1.125rem;
@@ -619,7 +618,7 @@ h4 { font-size: 1.25rem; }
 /* Định dạng thẻ H2, H3 trong bài viết (SEO) */
 .tc-content h2 {
     font-size: 1.75rem;
-    margin: 3rem 0 1rem 0;
+    margin: 5rem 0 3rem 0;
     color: #111;
 }
 
@@ -667,12 +666,14 @@ h4 { font-size: 1.25rem; }
 
 /* Sapo (Đoạn mở đầu in nghiêng, viền nhấn) */
 .sapo-part p {
+    font-family: var(--tc-font-mono);
     font-style: italic;
     font-size: 1.2rem;
     font-weight: 700;
     border-left: 2px solid #2c2825;
     padding-left: 1rem;
     margin-bottom: 2.5rem;
+    line-height: 1.5;
 }
 
 /* Responsive cho Mobile */
