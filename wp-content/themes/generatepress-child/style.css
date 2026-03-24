@@ -37,9 +37,9 @@ body {
 
 /* CHUẨN HÓA THẺ P THEO YÊU CẦU */
 p {
-    font-family: var(--tc-font-mono);
-    font-size: 1.3rem;
-    font-weight: 300;
+    font-family: var(--tc-font-main);
+    font-size: 1.1rem;
+    font-weight: 200;
     line-height: 1.4;
     color: var(--tc-text-main);
     margin-bottom: 1.6em; 
@@ -297,7 +297,7 @@ h4 { font-size: 1.25rem; }
 }
 
 .tc-role {
-    font-family: var(--tc-font-mono);
+    font-family: var(--tc-font-main);
     font-style: italic;
     color: var(--tc-text-muted);
     font-size: 1.125rem;
