@@ -597,7 +597,7 @@ h4 { font-size: 1.25rem; }
 .tc-featured-image img {
     width: 100%;
     height: auto;
-
+    display: block;
 }
 
 /* ĐỊNH DẠNG NỘI DUNG CHỮ & ẢNH TRONG BÀI */
