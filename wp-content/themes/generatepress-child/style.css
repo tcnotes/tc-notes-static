@@ -71,7 +71,7 @@ h1, h3, h4, h5, h6 {
 h2 {
     font-family: var(--tc-font-mono);
     font-size: 2.5rem;
-    text-align: center;
+    text-align: left;
     font-weight: 700;
     color: var(--tc-text-main);
     line-height: 1.3;
@@ -139,13 +139,13 @@ h4 { font-size: 1.25rem; }
     opacity: 0.6; 
 }
 
-.tc-main-nav a.tc-nav-btn {
+.tc-btn {
     padding: 0.4em 1em; 
-    border: 1px solid var(--tc-text-main);
+    border: 1px solid var(--tc-text-main) !important;
     border-radius: 2px;
 }
 
-.tc-main-nav a.tc-nav-btn:hover {
+.tc-btn:hover {
     background-color: var(--tc-text-main);
     color: var(--tc-bg-color); 
     opacity: 1;
@@ -314,7 +314,14 @@ h4 { font-size: 1.25rem; }
     font-size: 1.125rem;
     line-height: 1.8;
 }
-
+.tc-home-wrapper .tc-card-image img  {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+.tc-home-wrapper h1 {
+    font-size: 2.8rem;
+    text-align: center;
+}
 .tc-intro-quote cite {
     font-family: var(--tc-font-mono); /* Tên tác giả giữ mono cho cứng cáp */
     display: block;
@@ -438,7 +445,8 @@ h4 { font-size: 1.25rem; }
 }
 
 .tc-read-more {
-    text-align: right;
+    text-align: left;
+    margin-top: 2rem;
 }
 
 /* Responsive */
@@ -622,8 +630,8 @@ h4 { font-size: 1.25rem; }
 
 /* Định dạng thẻ H2, H3 trong bài viết (SEO) */
 .tc-content h2 {
-    font-size: 2.3rem;
-    margin: 5rem 0 3rem 0;
+    font-size: 1.5rem;
+    margin: 3rem 0 1.5rem 0;
     color: #111;
 }
 
@@ -925,3 +933,4 @@ h4 { font-size: 1.25rem; }
         padding-top: 2rem;
     }
 }
+
