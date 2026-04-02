@@ -594,7 +594,7 @@ h4 { font-size: 1.25rem; }
 .tc-reading-room {
     max-width: 45rem; /* ~720px: Giới hạn hoàn hảo cho mắt đọc */
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: 5rem 1.5rem;
 }
 
 .tc-article-header {
@@ -603,13 +603,7 @@ h4 { font-size: 1.25rem; }
 }
 
 .tc-date {
-    display: inline-block;
-    font-family: var(--tc-font-mono), monospace; /* Font máy đánh chữ */
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.3rem;
+    font-size: 1rem;
 }
 
 .tc-title {
@@ -686,7 +680,7 @@ h4 { font-size: 1.25rem; }
 .tc-article-footer {
     margin-top: 5rem;
     padding-top: 2rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--tc-border);
 }
 
 .tc-post-navigation {
@@ -923,7 +917,7 @@ h4 { font-size: 1.25rem; }
 
 /* Ép thẻ H2 trong Grid về căn trái */
 .tc-silo-info .tc-silo-post-title {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
     text-align: left;
     margin-top: 0;
     margin-bottom: 1rem;
@@ -970,4 +964,273 @@ h4 { font-size: 1.25rem; }
     .tc-nav-prev, .tc-nav-next {
         width: 100%;
     }
+}
+
+
+/* ==========================================================================
+   TOC (MỤC LỤC) & TÁC GIẢ
+   ========================================================================== */
+
+/* -----------------------------------------------------------
+   1. MỤC LỤC: TRẠNG THÁI HIỂN THỊ BÌNH THƯỜNG TRONG BÀI VIẾT
+   ----------------------------------------------------------- */
+.tc-toc-wrapper {
+    margin: 2rem 0 3.5rem 0; /* Giữ chỗ để không bị giật trang khi cuộn */
+}
+
+.tc-toc-container {
+    background-color: #FFFFFF;
+    border: 1px solid var(--tc-border);
+    border-radius: 2px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.tc-toc-toggle {
+    font-family: var(--tc-font-mono);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--tc-text-main);
+    cursor: pointer;
+    outline: none;
+    list-style: none; /* Ẩn mũi tên mặc định của trình duyệt */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Ẩn mũi tên cho Safari/Chrome */
+.tc-toc-toggle::-webkit-details-marker {
+    display: none; 
+}
+
+/* Xử lý ký hiệu [+/-] ở trạng thái tĩnh */
+.tc-toc-icon {
+    color: var(--tc-text-muted);
+    font-weight: normal;
+}
+.tc-toc-container[open] .tc-toc-icon {
+    font-size: 0; /* Ẩn chữ [+] cứng trong HTML */
+}
+.tc-toc-container[open] .tc-toc-icon::after {
+    content: "[-]";
+    font-size: 1.05rem;
+}
+
+.tc-toc-container[open] .tc-toc-toggle {
+    border-bottom: 1px dashed var(--tc-border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.tc-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tc-toc-list li {
+    margin-bottom: 0.6rem;
+}
+
+.tc-toc-item-h2 a {
+    font-weight: 500;
+    color: var(--tc-text-main);
+    border-bottom: 1px solid transparent;
+}
+
+.tc-toc-item-h3 {
+    padding-left: 1.5rem; /* Thụt lề cho mục nhỏ */
+    position: relative;
+}
+
+.tc-toc-item-h3::before {
+    content: "↳"; /* Ký hiệu mũi tên rẽ nhánh cho H3 */
+    position: absolute;
+    left: 0;
+    color: var(--tc-text-muted);
+}
+
+.tc-toc-item-h3 a {
+    font-size: 0.95rem;
+    color: var(--tc-text-muted);
+}
+
+.tc-toc-item-h2 a:hover,
+.tc-toc-item-h3 a:hover {
+    color: #5f0808;
+    border-bottom-color: #5f0808;
+}
+
+/* -----------------------------------------------------------
+   2. MỤC LỤC: TRẠNG THÁI FLOATING/STICKY (KHI CUỘN HOẶC Ở TRANG PAGE)
+   ----------------------------------------------------------- */
+.tc-toc-container.is-sticky {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: max-content;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    z-index: 999;
+}
+
+/* Biến thẻ Summary thành một nút bấm tròn trịa */
+.tc-toc-container.is-sticky .tc-toc-toggle {
+    background-color: #ffffff; /* Nút màu đen/xám đậm */
+    color: var(--tc-base-3); /* Chữ màu trắng */
+    padding: 0.8rem 1.2rem;
+    border-radius: 2px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+    margin: 0;
+    border: none;
+    border-bottom: none !important; /* Xóa viền đứt quãng khi mở popup */
+}
+.tc-toc-wrapper :hover {
+    background-color: #ffffff; /* Nút màu đen/xám đậm */
+}
+/* Ẩn bớt các thành phần thừa khi thu thành nút */
+.tc-toc-container.is-sticky .tc-toc-icon {
+    display: none;
+}
+
+/* MENU POPUP: Hiển thị nổi lên trên nút khi click */
+.tc-toc-container.is-sticky .tc-toc-list {
+    position: absolute;
+    bottom: calc(100% + 15px); /* Trồi lên trên nút 15px */
+    right: 0;
+    width: 280px;
+    max-height: 60vh; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Thêm thanh cuộn nếu danh sách quá dài */
+    background-color: var(--tc-base-3);
+    padding: 1.5rem;
+    border: 1px solid var(--tc-border);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Link trong trạng thái Popup cần dễ bấm hơn */
+.tc-toc-container.is-sticky .tc-toc-list a {
+    display: block;
+    padding: 0.2rem 0;
+}
+
+/* Responsive cho Nút Floating trên Mobile */
+@media (max-width: 48em) {
+    .tc-toc-container.is-sticky {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    .tc-toc-container.is-sticky .tc-toc-list {
+        width: 85vw; /* Tự co giãn theo màn hình điện thoại */
+    }
+}
+
+/* -----------------------------------------------------------
+   3. HỘP THÔNG TIN TÁC GIẢ (AUTHOR BOX)
+   ----------------------------------------------------------- */
+
+.tc-author-name {
+    font-family: var(--tc-font-mono);
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem !important;
+}
+
+
+/* ==========================================================================
+   TOC - HIỆU ỨNG CHUYỂN ĐỘNG (SMOOTH ANIMATIONS)
+   ========================================================================== */
+
+/* 1. Cuộn mượt mà toàn trang khi bấm vào link Mục lục */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Hiệu ứng trượt lên và rõ dần cho nút Sticky */
+.tc-toc-container.is-sticky {
+    animation: stickySlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stickySlideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+/* 3. Hiệu ứng mọc ra mượt mà cho Menu Popup */
+.tc-toc-container.is-sticky[open] .tc-toc-list {
+    background-color: #fff;
+    animation: popupFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: bottom right; /* Nở ra từ vị trí cái nút */
+}
+
+@keyframes popupFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px) scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+/* 4. Hiệu ứng Hover êm ái cho Nút Sticky */
+.tc-toc-container.is-sticky .tc-toc-toggle {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.tc-toc-container.is-sticky .tc-toc-toggle:hover {
+    color: #000000;
+}
+
+
+/* ==========================================================================
+   SILO PAGE - VISUAL REORDERING (SEO HACK)
+   ========================================================================== */
+.tc-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.tc-order-1 { 
+    order: 1; 
+}
+
+/* Đẩy lưới bài viết lên trên cùng, sát dưới H1 */
+.tc-order-2 { 
+    order: 2; 
+    margin-top: 2rem; 
+}
+
+/* Kéo khối SEO Content xuống đáy, thêm viền để phân cách mềm mại */
+.tc-order-3 { 
+    order: 3; 
+    margin-top: 3rem; 
+    padding-top: 2.5rem; 
+}
+
+/* Chỉnh lại một chút cho thẻ H2 của khối lưới bài viết để tách bạch hơn */
+.tc-silo-container h2 {
+    margin-bottom: 2rem;
+    margin-top: 0;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--tc-border);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.tc-current {
+    font-weight: 700;
+}
+.tc-reading-room .tc-breadcrumbs {
+    margin-top: 1rem;
 }
