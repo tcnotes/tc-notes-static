@@ -84,7 +84,7 @@ h3 { font-size: 1.4rem; }
 h4 { font-size: 1.25rem; }
 
 /* ==========================================================================
-   3. CUSTOM HEADER & MENU (STATIC & STICKY)
+   3. CUSTOM HEADER & MENU (STATIC & STICKY - CSS GRID)
    ========================================================================== */
 .tc-custom-header {
     background-color: var(--tc-bg-color); 
@@ -102,14 +102,20 @@ h4 { font-size: 1.25rem; }
     backdrop-filter: blur(5px); 
 }
 
+/* Áp dụng CSS Grid để chia 3 cột: Trái - Giữa - Phải cân bằng tuyệt đối */
 .tc-header-inner {
     max-width: 75rem; 
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     position: relative; 
 }
+
+/* Căn lề cho 3 khối */
+.tc-logo { justify-self: start; }
+.tc-main-nav { justify-self: center; }
+.tc-header-right { justify-self: end; display: flex; align-items: center; gap: 1.5rem; }
 
 .tc-logo a {
     display: block;
@@ -123,14 +129,15 @@ h4 { font-size: 1.25rem; }
     border-radius: 2px;
 }
 
+/* Định dạng Menu Giữa */
 .tc-main-nav {
     display: flex;
     align-items: center;
-    gap: 2rem; 
+    gap: 3rem; 
 }
 
 .tc-main-nav a {
-    font-size: 1.4rem; 
+    font-size: 1.15rem; 
     text-transform: lowercase; 
     border-bottom: none;
 }
@@ -139,6 +146,7 @@ h4 { font-size: 1.25rem; }
     opacity: 0.6; 
 }
 
+/* Định dạng nút bấm chung */
 .tc-btn {
     padding: 0.4em 1em; 
     border: 1px solid var(--tc-text-main) !important;
@@ -150,6 +158,9 @@ h4 { font-size: 1.25rem; }
     color: var(--tc-bg-color); 
     opacity: 1;
 }
+
+/* Logic hiển thị Nút PC / Mobile */
+.tc-mobile-contact { display: none !important; }
 
 .tc-menu-toggle-checkbox { display: none; }
 
@@ -171,7 +182,18 @@ h4 { font-size: 1.25rem; }
     transition: all 0.3s ease;
 }
 
+/* --- RESPONSIVE MOBILE CHO HEADER --- */
 @media (max-width: 64em) { 
+    /* Gỡ Grid, chuyển về Flex cho Mobile để Logo và Nút giãn đều 2 bên */
+    .tc-header-inner {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Đảo ngược logic hiển thị nút bấm */
+    .tc-desktop-contact { display: none !important; }
+    .tc-mobile-contact { display: inline-block !important; }
+
     .tc-menu-toggle-label {
         display: flex; 
     }
@@ -202,12 +224,16 @@ h4 { font-size: 1.25rem; }
         transform: translateY(0);
     }
 
+    /* Animation dấu X cho Hamburger menu (Hỗ trợ cấu trúc HTML mới và cũ) */
+    .tc-menu-toggle-checkbox:checked ~ .tc-header-right .line-1,
     .tc-menu-toggle-checkbox:checked + .tc-menu-toggle-label .line-1 {
         transform: translateY(9px) rotate(45deg);
     }
+    .tc-menu-toggle-checkbox:checked ~ .tc-header-right .line-2,
     .tc-menu-toggle-checkbox:checked + .tc-menu-toggle-label .line-2 {
         opacity: 0; 
     }
+    .tc-menu-toggle-checkbox:checked ~ .tc-header-right .line-3,
     .tc-menu-toggle-checkbox:checked + .tc-menu-toggle-label .line-3 {
         transform: translateY(-9px) rotate(-45deg);
     }
@@ -945,4 +971,3 @@ h4 { font-size: 1.25rem; }
         width: 100%;
     }
 }
-
